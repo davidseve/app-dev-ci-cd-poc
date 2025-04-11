@@ -10,7 +10,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     path: continuous-integration-repo/java-pipeline
-    repoURL: https://github.com/davidseve/poc-quarkus-applications.git
+    repoURL: https://github.com/davidseve/app-dev-ci-cd-poc.git
     targetRevision: HEAD
     directory:
       recurse: true

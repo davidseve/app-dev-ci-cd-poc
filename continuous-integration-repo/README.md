@@ -40,3 +40,5 @@ secret:
 ```
 oc apply -f argoCD/application-pipeline-ci-java.yaml
 ```
+
+* Create Web Hook in Git repository using the Evente Lisenser Route, with Content type "application/json"
