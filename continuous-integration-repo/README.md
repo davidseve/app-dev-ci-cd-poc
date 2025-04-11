@@ -35,3 +35,8 @@ metadata:
 secret:
   - name: quay-pull-secret
 ```
+
+* Create Argo CD application that deploy the pipelines
+```
+oc apply -f argoCD/application-pipeline-ci-java.yaml
+```
