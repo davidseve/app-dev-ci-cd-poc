@@ -1,0 +1,45 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: java-template
+spec:
+  params:
+  - name: git-repo-url
+  - name: git-revision
+  - name: git-repo-name  
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+      generateName: $(tt.params.git-repo-name)
+    spec:
+      pipelineRef:
+        name: build-java-application
+      params:
+      - name: SOURCE_GIT_URL
+        value: $(tt.params.git-repo-url)
+      - name: SOURCE_GIT_REVISION
+        value: $(tt.params.git-revision)        
+      - name: APP_NAME
+        value: $(tt.params.git-repo-name)
+        
+      workspaces:
+      - name: workspace-source
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 1Gi
+            volumeMode: Filesystem
+      - name: maven_settings
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 1Gi
+            volumeMode: Filesystem      
+

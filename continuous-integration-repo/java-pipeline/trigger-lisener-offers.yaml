@@ -1,0 +1,41 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: java-listener
+spec:
+  serviceAccountName: pipeline
+  triggers:
+  - name: java
+    triggerRef: java-trigger
+---
+apiVersion: triggers.tekton.dev/v1beta1 
+kind: Trigger 
+metadata:
+  name: java-trigger
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  bindings:
+  - ref: java-binding
+  template:
+    ref: java-template
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: java-listener-router
+  labels:
+    app.kubernetes.io/managed-by: EventListener
+    app.kubernetes.io/part-of: Triggers
+spec:
+  to:
+    kind: Service
+    name: el-java-listener
+    weight: 100
+  port:
+    targetPort: http-listener
+  wildcardPolicy: None
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

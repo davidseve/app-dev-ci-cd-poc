@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pipelines-ci-java
+  namespace: openshift-gitops
+spec:
+  destination:
+    name: ''
+    namespace: pipeline-ci
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: continuous-integration-repo/java-pipeline
+    repoURL: https://github.com/davidseve/poc-quarkus-applications.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
