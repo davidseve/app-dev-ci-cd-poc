@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: java
+  namespace: openshift-gitops
+spec:
+  destination:
+    name: ''
+    namespace: dev
+    server: 'https://kubernetes.default.svc'
+  sources:
+    - path: helm-chart-java-repo
+      repoURL: https://github.com/davidseve/app-dev-ci-cd-poc.git
+      targetRevision: HEAD
+      helm:
+        valueFiles:    
+          - $values/clusters/cluster1/values.yaml
+          - $values/environments/dev/values.yaml          
+          - $values/clusters/cluster1/dev/values.yaml
+          - $values/apps/java/values.yaml            
+          - $values/apps/java/clusters/cluster1/values.yaml
+          - $values/apps/java/clusters/cluster1/dev/values.yaml                
+    - ref: values
+      repoURL: 'https://github.com/davidseve/app-dev-ci-cd-poc.git'
+      targetRevision: HEAD        
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
