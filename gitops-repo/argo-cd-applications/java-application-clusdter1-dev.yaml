@@ -22,7 +22,8 @@ spec:
           - $values/apps/java/clusters/cluster1/dev/values.yaml                
     - ref: values
       repoURL: 'https://github.com/davidseve/app-dev-ci-cd-poc.git'
-      targetRevision: HEAD        
+      targetRevision: HEAD
+      path: gitops-repo       
   project: default
   syncPolicy:
     automated:
