@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: java-applications-bootstrap
+  namespace: openshift-gitops
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - matrix:
+        generators: 
+          - git:
+              repoURL: https://github.com/davidseve/app-dev-ci-cd-poc.git
+              revision: HEAD
+              directories:
+              - path: clusters/**/*
+              pathParamPrefix: cluster                            
+          - git:
+              repoURL: https://github.com/davidseve/app-dev-ci-cd-poc.git
+              revision: HEAD
+              files:
+              - path: apps/**/{{index .cluster.path.segments 1}}/{{index .cluster.path.segments 2}}/chart-config.json
+              pathParamPrefix: app         
+  template:
+    metadata:
+      name: '{{index .app.path.segments 1}}-{{index .cluster.path.segments 2}}-{{index .cluster.path.segments 1}}'
+    spec:
+      project: default
+      sources:
+      - path: '{{.chartPath}}'
+        repoURL: '{{.repoURL}}'
+        targetRevision: '{{.targetRevision}}'
+        helm:
+          valueFiles:
+            - $values/apps/{{index .app.path.segments 1}}/base/values.yaml            
+            - $values/apps/{{index .app.path.segments 1}}/{{index .cluster.path.segments 1}}/values.yaml
+            - $values/apps/{{index .app.path.segments 1}}/{{index .cluster.path.segments 1}}/{{index .cluster.path.segments 2}}/values.yaml      
+            - $values/clusters/{{index .cluster.path.segments 1}}/values.yaml
+            - $values/clusters/{{index .cluster.path.segments 1}}/{{index .cluster.path.segments 2}}/values.yaml        
+      - ref: values
+        repoURL: 'https://github.com/davidseve/app-dev-ci-cd-poc.git
+        targetRevision: HEAD
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{index .cluster.path.segments 2}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

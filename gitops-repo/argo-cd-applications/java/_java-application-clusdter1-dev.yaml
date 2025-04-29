@@ -14,16 +14,15 @@ spec:
       targetRevision: HEAD
       helm:
         valueFiles:    
-          - $values/clusters/cluster1/values.yaml
-          - $values/environments/dev/values.yaml          
-          - $values/clusters/cluster1/dev/values.yaml
-          - $values/apps/java/values.yaml            
-          - $values/apps/java/clusters/cluster1/values.yaml
-          - $values/apps/java/clusters/cluster1/dev/values.yaml                
+          - $values/gitops-repo/clusters/cluster1/values.yaml
+          - $values/gitops-repo/environments/dev/values.yaml          
+          - $values/gitops-repo/clusters/cluster1/dev/values.yaml
+          - $values/gitops-repo/apps/java/values.yaml            
+          - $values/gitops-repo/apps/java/clusters/cluster1/values.yaml
+          - $values/gitops-repo/apps/java/clusters/cluster1/dev/values.yaml                
     - ref: values
       repoURL: 'https://github.com/davidseve/app-dev-ci-cd-poc.git'
-      targetRevision: HEAD
-      path: gitops-repo       
+      targetRevision: HEAD      
   project: default
   syncPolicy:
     automated:
