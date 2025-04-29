@@ -16,7 +16,7 @@ spec:
 ```
 * Creat image repositroy in Quay.
 * Cread Robot Accounts in Quay wih write previleges to the new image repository.
-* Creat sicret with Robot Accounts credentials.
+* Creat secret with Robot Accounts credentials.
 * Add secret to 'pipeline' ServiceAccout
 Example:
 ```
