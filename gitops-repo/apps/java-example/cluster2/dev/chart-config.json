@@ -1,0 +1,5 @@
+{
+    "chartPath": "helm-chart-java-repo",
+    "repoURL": "https://github.com/davidseve/app-dev-ci-cd-poc.git",
+    "targetRevision": "main"
+}
