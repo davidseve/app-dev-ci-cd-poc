@@ -19,7 +19,7 @@ This directory contains Tekton pipeline configurations for building and deployin
 - **`trigger-binding-java.yaml`**: A Tekton TriggerBinding that maps incoming event payloads to parameters for the TriggerTemplate.
 - **`trigger-lisener-java.yaml`**: An EventListener that listens for external events and triggers the pipeline using the defined TriggerTemplate and TriggerBinding.
 
-### 2. `argoCD/`
+### 2. `argo-cd-applications/`
 This directory contains ArgoCD application definitions for managing the CI pipeline resources:
 
 - **`application-pipeline-ci-java.yaml`**: Defines an ArgoCD application to manage the Tekton pipeline resources in the `java-pipeline/` directory.
@@ -52,7 +52,7 @@ The repository is designed to:
 Apply the ArgoCD application configuration to deploy the pipelines:
 
 ```bash
-oc apply -f argoCD/application-pipeline-ci-java.yaml
+oc apply -f argo-cd-applications/application-pipeline-ci-java.yaml
 ```
 
 ### Configure Webhook
