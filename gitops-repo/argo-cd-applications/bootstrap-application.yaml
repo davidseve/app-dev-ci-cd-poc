@@ -12,7 +12,7 @@ spec:
             configMapRef: acm-placement
             labelSelector:
               matchLabels:
-                cluster.open-cluster-management.io/placement: sescam-placement
+                cluster.open-cluster-management.io/placement: apps-placement
             requeueAfterSeconds: 30                                  
         - git:
             repoURL: https://github.com/davidseve/app-dev-ci-cd-poc.git

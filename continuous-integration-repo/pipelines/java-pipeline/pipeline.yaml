@@ -74,7 +74,7 @@ spec:
       - name: maven_settings
         workspace: maven_settings
 
-  - name: build-sign-image
+  - name: build-image
     params:
       - name: IMAGE
         value: $(params.IMAGE)$(params.APP_NAME):$(params.TAG)

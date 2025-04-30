@@ -9,7 +9,7 @@ spec:
     namespace: pipeline-ci
     server: 'https://kubernetes.default.svc'
   source:
-    path: continuous-integration-repo/java-pipeline
+    path: continuous-integration-repo/pipelines
     repoURL: https://github.com/davidseve/app-dev-ci-cd-poc.git
     targetRevision: HEAD
     directory:
