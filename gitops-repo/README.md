@@ -9,7 +9,7 @@ This folder contains the list of all applications to be deployed, along with the
 
 #### Example:
 For the application `java-example` in the `cluster1` environment:
-- `apps/java-example/cluster1/int/chart-config.json`:
+- `apps/java-example/cluster1/pre/chart-config.json`:
 ```json
 {
     "chartPath": "helm-chart-java-repo",
@@ -31,7 +31,7 @@ This folder contains the list of all environments where applications will be dep
 
 #### Example:
 - `environments/dev/values.yaml`: Contains shared configuration values for the `dev` environment.
-- `environments/int/values.yaml`: Contains shared configuration values for the `int` environment.
+- `environments/pre/values.yaml`: Contains shared configuration values for the `pre` environment.
 
 ### `clusters`
 This folder contains the list of all clusters where applications will be deployed. It includes specific configurations for each environment and cluster, shared across all applications.

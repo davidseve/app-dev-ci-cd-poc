@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
- name: aso-bootstrap-multicluster
+ name: applications-bootstrap-multicluster
  namespace: openshift-gitops
 spec:
   goTemplate: true
