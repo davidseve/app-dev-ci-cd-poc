@@ -11,6 +11,8 @@ The repository is organized into several subfolders, each with a specific purpos
 - **Purpose**: Contains the source code and resources for a Quarkus-based application.
 - **Key Files**:
   - `pom.xml`: Maven configuration for building the application.
+  - `Dockerfile.jvm`: Docker configuration for building the application.
+  
 
 ### Continuous Integration Repository
 - **Folder**: `continuous-integration-repo`
